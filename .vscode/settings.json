@@ -1,0 +1,4 @@
+{
+  "emmet.showExpandedAbbreviation": "never",
+  "eslint.validate": ["javascript", "astro", "typescript"]
+}

@@ -1,0 +1,33 @@
+---
+import { SITE_TITLE, MISSKEY_LINK, TWITTER_LINK } from "../consts";
+import MissKeyIcon from "./MissKeyIcon.astro";
+import TwitterIcon from "./TwitterIcon.astro";
+---
+
+<header>
+  <nav class="flex justify-around items-center p-4">
+    <h1>
+      <a
+        class="hover:text-blue-700 transition-colors text-lg tracking-tight"
+        href="/">{SITE_TITLE}</a
+      >
+    </h1>
+    <div class="flex gap-2 justify-around items-center">
+      <a href={MISSKEY_LINK} rel="noopener noreferrer" target="_blank">
+        <span class="sr-only">Follow me on Misskey</span>
+        <MissKeyIcon class="w-10 h-10 hover:text-green-500 transition-colors" />
+      </a>
+      <a href={TWITTER_LINK} rel="noopener noreferrer" target="_blank">
+        <span class="sr-only">Follow me on Twitter</span>
+        <TwitterIcon class="w-10 h-10 hover:text-[#55acee] transition-colors" />
+      </a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    background: white;
+    box-shadow: 0 2px 8px -8px rgba(15, 18, 25, 15%);
+  }
+</style>

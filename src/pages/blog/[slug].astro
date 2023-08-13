@@ -1,0 +1,16 @@
+---
+export async function getStaticPaths() {
+  const blogs = await Astro.glob("../../content/blog/*.md");
+  return blogs.map((b) => {
+    return {
+      params: { slug: b.file.split("/").pop()?.split(".").shift() },
+      props: { post: b },
+    };
+  });
+}
+
+const { Content, frontmatter } = Astro.props.post;
+const { title, date } = frontmatter;
+---
+
+<Content />
