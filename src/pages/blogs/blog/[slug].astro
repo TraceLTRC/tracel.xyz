@@ -21,9 +21,10 @@ const { Content } = await post.render();
 
 <BaseLayout title={post.data.title + " | White Space"}>
   <div class="flex flex-col items-center pt-4">
-    <article class="prose xl:prose-lg prose-h3:mb-0.5 prose-h6:mt-0.5 prose-h6:italic">
+    <article class="prose xl:prose-lg prose-h3:mb-0.5 prose-h6:italic">
       <h3>{ post.data.title }</h1>
       <h6>{ post.data.description }</h4>
+      <time class="text-sm">{ post.data.date.toLocaleDateString() }</time>
       <Content />
     </article>
   </div>
