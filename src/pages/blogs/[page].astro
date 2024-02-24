@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import BaseLayout from "../../layouts/BaseLayout.astro"
 import Card from "../../components/Card.astro"
+import ArrowLeft from "../../components/icons/ArrowLeft.astro"
 
 import { getSortedPosts } from "../../utils";
 
@@ -15,17 +16,40 @@ const { page } = Astro.props;
 <!-- TODO: Add sorting options (time, title, popularity)-->
 <!-- TODO: Rest paramater for some reason doesnt work with types -->
 <BaseLayout title="Blogs | White Space">
-  <ol class="flex flex-col gap-2 lg:px-[20%] mt-4">
-    {
-    page.data.map((data) => (
-            <li>
-              <Card
-                title={data.data.title}
-                body={data.data.description}
-                href={"/blogs/blog/" + data.slug}
-              />
-            </li>
-          ))
-    }
-  </ol>
+  <main class="flex-1 flex flex-col justify-between items-stretch">
+    <div class="w-full">
+      <ol class="flex flex-col gap-2 lg:px-[20%] mt-4">
+        {
+        page.data.map((data) => (
+                <li>
+                  <Card
+                    title={data.data.title}
+                    body={data.data.description}
+                    href={"/blogs/blog/" + data.slug}
+                  />
+                </li>
+              ))
+        }
+      </ol>
+    </div>
+    <div class="w-full flex justify-center items-stretch">
+      {page.url.prev ?
+        <a href={page.url.prev}>
+          <ArrowLeft class="aspect-square lg:text-xl"></ArrowLeft>
+        </a>
+      : <a class="pointer-events-none invisible">
+          <ArrowLeft class="aspect-square lg:text-xl"></ArrowLeft>
+        </a>
+      }
+      <span class="lg:text-xl aspect-square flex justify-center items-center">{page.currentPage}</span>
+      {page.url.next ?
+        <a href={page.url.next}>
+          <ArrowLeft class="aspect-square lg:text-xl"></ArrowLeft>
+        </a>
+      : <a class="pointer-events-none invisible">
+          <ArrowLeft class="aspect-square lg:text-xl"></ArrowLeft>
+        </a>
+      }
+    </div>
+  </main>
 </BaseLayout>

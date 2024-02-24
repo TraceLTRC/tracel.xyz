@@ -7,35 +7,37 @@ const recentPosts = await getSortedPosts(( entry ) => !entry.data.draft);
 ---
 
 <BaseLayout title="White Space">
-  <div class="flex flex-col gap-6 px-2 py-4 md:px-[10%] lg:px-[20%]">
-    <div>
-      <p class="font-normal">
-        Welcome to my White Space.
-      </p>
-      <p class="font-normal">This is where I ramble.</p>
-      <p class="font-normal">
-        I love to build software, and I love talking about it.
-      </p>
-      <p class="font-normal">Expect occasional off-topic posts.</p>
-    </div>
-    <div>
-      <h3 class="text-2xl border-b-2 border-b-text">Recent posts</h3>
-      <div class="pt-2 flex flex-col gap-1">
-        {
-          recentPosts.map((data) => (
-            <Card
-              title={data.data.title}
-              body={data.data.description}
-              href={"/blogs/blog/" + data.slug}
-            />
-          ))
-        }
-            <Card
-              title="See all posts..."
-              body=""
-              href="/blogs/1"
-            />
+  <main class="flex-1">
+    <div class="flex flex-col gap-6 px-2 py-4 md:px-[10%] lg:px-[20%]">
+      <div>
+        <p class="font-normal">
+          Welcome to my White Space.
+        </p>
+        <p class="font-normal">This is where I ramble.</p>
+        <p class="font-normal">
+          I love to build software, and I love talking about it.
+        </p>
+        <p class="font-normal">Expect occasional off-topic posts.</p>
+      </div>
+      <div>
+        <h3 class="text-2xl border-b-2 border-b-text">Recent posts</h3>
+        <div class="pt-2 flex flex-col gap-1">
+          {
+            recentPosts.map((data) => (
+              <Card
+                title={data.data.title}
+                body={data.data.description}
+                href={"/blogs/blog/" + data.slug}
+              />
+            ))
+          }
+              <Card
+                title="See all posts..."
+                body=""
+                href="/blogs/1"
+              />
+        </div>
       </div>
     </div>
-  </div>
+  <main class="flex-1">
 </BaseLayout>
