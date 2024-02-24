@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content"
+import BaseLayout from "../../layouts/BaseLayout.astro"
+
+interface Props {
+  post: CollectionEntry<'posts'>
+}
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => {
+    return {params: { slug: post.slug }, props: { post }}
+  })
+
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title + " | White Space"}>
+  <div class="flex flex-col items-center pt-4">
+    <article class="prose xl:prose-lg prose-h3:mb-0.5 prose-h6:mt-0.5 prose-h6:italic">
+      <h3>{ post.data.title }</h1>
+      <h6>{ post.data.description }</h4>
+      <Content />
+    </article>
+  </div>
+</BaseLayout>

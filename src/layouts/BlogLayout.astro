@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props;
+
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+<BaseLayout title={title}>
+  <article class="prose">
+    <slot />
+  </article>
+</BaseLayout>
