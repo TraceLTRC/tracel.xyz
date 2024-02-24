@@ -1,12 +1,9 @@
 ---
-import { getCollection } from "astro:content";
+import { getSortedPosts } from "../utils.ts"
 import Card from "../components/Card.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const recentPosts = (await getCollection("posts")).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-).slice(0, 5);
-
+const recentPosts = await getSortedPosts(( entry ) => !entry.data.draft);
 ---
 
 <BaseLayout title="White Space">
@@ -29,14 +26,14 @@ const recentPosts = (await getCollection("posts")).sort(
             <Card
               title={data.data.title}
               body={data.data.description}
-              href={"/blogs/" + data.slug}
+              href={"/blogs/blog/" + data.slug}
             />
           ))
         }
             <Card
               title="See all posts..."
               body=""
-              href="/blogs/"
+              href="/blogs/1"
             />
       </div>
     </div>

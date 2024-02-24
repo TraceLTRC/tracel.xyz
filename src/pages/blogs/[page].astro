@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import Card from "../../components/Card.astro"
+
+import { getSortedPosts } from "../../utils";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getSortedPosts(( entry ) => !entry.data.draft);
+  return paginate(allPosts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+<!-- TODO: Add sorting options (time, title, popularity)-->
+<!-- TODO: Rest paramater for some reason doesnt work with types -->
+<BaseLayout title="Blogs | White Space">
+  <ol class="flex flex-col gap-2 lg:px-[20%] mt-4">
+    {
+    page.data.map((data) => (
+            <li>
+              <Card
+                title={data.data.title}
+                body={data.data.description}
+                href={"/blogs/blog/" + data.slug}
+              />
+            </li>
+          ))
+    }
+  </ol>
+</BaseLayout>
